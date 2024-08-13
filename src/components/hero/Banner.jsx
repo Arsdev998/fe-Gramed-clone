@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -6,13 +6,20 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
-import banner1 from "@/assets/image/banner1.jpg";
-import banner2 from "@/assets/image/banner2.png";
-import banner3 from "@/assets/image/banner3.jpg";
-import banner4 from "@/assets/image/banner4.jpg";
 import Autoplay from "embla-carousel-autoplay";
+import { get } from "@/utils/api";
 
 const Banner = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const feetchBanner = async () => {
+      const response = await get("/api/banner/get");
+      setData(response.data);
+    };
+    feetchBanner();
+  }, []);
+
   return (
     <div>
       <Carousel
@@ -22,48 +29,23 @@ const Banner = () => {
           }),
         ]}
         opts={{ loop: true }}
-        className="w-[700px] h-[350px] relative"
+        className="w-full md:w-[800px] h-[150px] md:h-[400px] relative"
       >
         <CarouselContent className="w-full h-full">
-          <CarouselItem className="w-full h-full">
-            <div className="p-1">
-              <img
-                src={banner1}
-                alt=""
-                className="h-[350px] w-[700px] object-cover"
-              />
-            </div>
-          </CarouselItem>
-          <CarouselItem className="w-full">
-            <div className="p-1">
-              <img
-                src={banner2}
-                alt=""
-                className="h-[350px] w-[700px] object-cover"
-              />
-            </div>
-          </CarouselItem>
-          <CarouselItem className="w-[700px]">
-            <div className="p-1">
-              <img
-                src={banner3}
-                alt=""
-                className="h-[350px] w-[700px] object-cover"
-              />
-            </div>
-          </CarouselItem>
-          <CarouselItem className="w-full">
-            <div className="p-1">
-              <img
-                src={banner4}
-                alt=""
-                className="h-[350px] w-[700px] object-cover"
-              />
-            </div>
-          </CarouselItem>
+          {data.map((item) => (
+            <CarouselItem key={item.id} className="w-full h-full">
+              <div className="p-1 rounded-md overflow-hidden">
+                <img
+                  src={item.bannerUrl}
+                  alt={item.promo}
+                  className="h-[150px] md:h-[400px] w-full md:w-[800px] object-cover rounded-md"
+                />
+              </div>
+            </CarouselItem>
+          ))}
         </CarouselContent>
-        <CarouselPrevious className="absolute top-1/2 left-4 -translate-y-1/2 text-red-500" />
-        <CarouselNext className="absolute top-1/2 right-5 -translate-y-1/2 text-red-500" />
+        <CarouselPrevious className="absolute top-1/2 left-4 text-2xl -translate-y-1/2 text-red-500" />
+        <CarouselNext className="absolute top-1/2 right-7 text-2xl -translate-y-1/2 text-red-500" />
       </Carousel>
     </div>
   );
