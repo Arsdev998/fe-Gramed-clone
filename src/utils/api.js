@@ -13,7 +13,7 @@ const api = axios.create({
 export const get = async (endpoint) => {
   try {
     const response = await api.get(endpoint);
-    return response.data
+    return response.data;
   } catch (error) {
     console.log(error);
     throw error;
@@ -22,8 +22,18 @@ export const get = async (endpoint) => {
 
 export const getById = async (endpoint, id) => {
   try {
-    const response = await api.get(endpoint,id);
+    const response = await api.get(endpoint, id);
     return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const post = async (endpoint, data) => {
+  try {
+    const response = await api.post(endpoint, data);
+    return response;
   } catch (error) {
     console.log(error);
     throw error;
@@ -40,14 +50,12 @@ export const put = async (endpoint, data) => {
   }
 };
 
-export const remove = async (endpoint,id) => {
-    try {
-        const response = await api.delete(endpoint,id);
-        return response
-    } catch (error) {
-        console.log(error);
-        throw error
-    }
-}
-
-
+export const remove = async (endpoint, id) => {
+  try {
+    const response = await api.delete(endpoint, id);
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

@@ -24,7 +24,7 @@ const ProductDetail = ({ id }) => {
     <section>
     <BreadcrumbHeader current={data.title} />
       <div className="mt-[50px] p-5 flex flex-col md:flex-row w-full max-w-[1200px] mx-auto gap-x-10">
-        <div className="flex justify-center md:justify-start">
+        <div className="flex justify-center md:justify-start p-5 rounded-md bg-white shadow-2xl">
           <img
             src={data.coverUrl}
             alt={data.title}
