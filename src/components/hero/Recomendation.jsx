@@ -25,6 +25,7 @@ const Recomendation = () => {
             img={item.coverUrl}
             author={item.author}
             price={item.price}
+            id={item.id}
           />
         ))}
       </div>

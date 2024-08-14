@@ -22,8 +22,8 @@ export const get = async (endpoint) => {
 
 export const getById = async (endpoint, id) => {
   try {
-    const response = await api.get(endpoint, id);
-    return response;
+    const response = await api.get(endpoint,id);
+    return response.data;
   } catch (error) {
     console.log(error);
     throw error;
