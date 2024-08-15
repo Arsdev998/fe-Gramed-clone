@@ -17,7 +17,7 @@ const Recomendation = () => {
   return (
     <section className="flex flex-col justify-center items-center w-[1150px] mt-[20px]">
       <HeadList title={"Rekomendasi Gramedia Untukmu"} href={"#"} />
-      <div className="w-full justify-center flex gap-x-2">
+      <div className="w-full justify-center flex gap-x-4">
         {data.map((item) => (
           <CardBook
             key={item.id}

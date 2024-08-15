@@ -4,6 +4,7 @@ import HelpHeader from "./components/header/HelpHeader";
 import { useDispatch } from "react-redux";
 import { getMe } from "./features/authSlice";
 import { useEffect } from "react";
+import { Toaster } from "sonner";
 
 export default function App() {
   const dispacth = useDispatch();
@@ -15,6 +16,7 @@ export default function App() {
       <HelpHeader />
       <Header />
       <Outlet />
+      <Toaster richColors position="bottom-center"/>
     </>
   );
 }
