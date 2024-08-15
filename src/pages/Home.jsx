@@ -1,5 +1,5 @@
-import Hero from '@/components/hero/Hero'
-import Recomendation from '@/components/hero/Recomendation'
+import Hero from '@/components/home/hero/Hero'
+import Recomendation from '@/components/home/hero/Recomendation'
 import React from 'react'
 
 const Home = () => {

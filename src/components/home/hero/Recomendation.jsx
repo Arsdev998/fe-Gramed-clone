@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import HeadList from "../ui/head-list";
+import HeadList from "@/components/ui/head-list";
+import CardBook from "@/components/ui/CardBook";
 import { get } from "@/utils/api";
-import CardBook from "../ui/CardBook";
 
 const Recomendation = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchRecomendation = async () => {
-      const response = await get("/api/book/get");
-      setData(response.data);
+      const response = await get("/api/book/getRecomendation");
+      setData(response);
     };
     fetchRecomendation();
   }, []);

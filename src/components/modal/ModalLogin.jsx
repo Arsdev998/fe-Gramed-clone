@@ -29,10 +29,8 @@ export function ModalLogin() {
       dispatch(login(data));
     } catch (error) {
       console.log(error);
-      
     }
   };
-  console.log(error);
   
 
   return (
@@ -40,12 +38,12 @@ export function ModalLogin() {
       <DialogTrigger asChild>
         <Button variant="ghost" className="text-gramed text-lg">Masuk</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] right-[1%] top-[35%]">
+      <DialogContent className="max-w-[325px] right-[1%] top-[30%]">
         <DialogHeader>
           <DialogTitle>Masuk ke Akun Anda</DialogTitle>
           {error && <p className="text-red-600">{error}</p>}
         </DialogHeader>
-        <form className="grid gap-4 py-4">
+        <form className="grid gap-4 py-4" onSubmit={handlelogin}>
           <div className="relative">
             <Label
               htmlFor="email"
@@ -91,7 +89,7 @@ export function ModalLogin() {
             />
           </div>
           <DialogFooter>
-            <Button type="submit" onClick={handlelogin}>
+            <Button type="submit">
               Masuk
             </Button>
           </DialogFooter>

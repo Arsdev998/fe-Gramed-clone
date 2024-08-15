@@ -2,8 +2,8 @@ import { get, post } from "@/utils/api";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: null,
   isAuthenticated: false,
+  user: null,
   status: "idle",
   error: null,
   isLoading: false,
@@ -38,14 +38,22 @@ export const register = createAsyncThunk(
 export const getMe = createAsyncThunk("/api/auth/me", async () => {
   try {
     const response = await get("/api/auth/me");
-    return response.data;
+    return response;
   } catch (error) {
     const message = error.response?.data?.message || error.message;
     return thunkApi.rejectWithValue(message);
   }
 });
 
-export const logout = createAsyncThunk("/api/auth/logout");
+export const logout = createAsyncThunk("/api/auth/logout", async () => {
+  try {
+    const response = await post("/api/auth/logout");
+    return response.data;
+  } catch (error) {
+    const message = error.response?.data?.message || error.message;
+    return thunkApi.rejectWithValue(message);
+  }
+});
 
 const authSlice = createSlice({
   name: "auth",
@@ -65,7 +73,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isAuthenticated = true;
-        state.user = action.payload;
+        state.user = action.payload.user;
         state.status = "succeeded";
         state.error = null;
       })
@@ -100,18 +108,21 @@ const authSlice = createSlice({
         console.log("Logout succes");
       })
       .addCase(logout.rejected, (state) => {
-        state;
+        state.status = "failed";
+        console.log("Logout failed");
       })
       .addCase(getMe.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isAuthenticated = true;
         state.status = "succeeded";
-      }).addCase(getMe.rejected, (state, action) => {
+        state.error = null;
+      })
+      .addCase(getMe.rejected, (state, action) => {
         state.error = action.payload;
         state.isAuthenticated = false;
         state.user = null;
         state.status = "failed";
-      })
+      });
   },
 });
 

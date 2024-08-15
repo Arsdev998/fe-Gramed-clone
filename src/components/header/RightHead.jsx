@@ -3,6 +3,7 @@ import { Button } from "../ui/button";
 import { SlUser, SlHandbag } from "react-icons/sl";
 import { useSelector } from "react-redux";
 import { ModalLogin } from "../modal/ModalLogin";
+import { ModalProfile } from "../modal/ModalProfile";
 
 const RightHead = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -11,13 +12,7 @@ const RightHead = () => {
   return (
     <div className="flex w-[150px] justify-between">
       {isAuthenticated ? (
-        <Button
-          variant="ghost"
-          size="icon"
-          className="border-2 border-gramed text-gramed hover:text-gramed/80 hover:border-gramed/80 text-3xl p-[6px] rounded-full"
-        >
-          <SlUser className="" />
-        </Button>
+        <ModalProfile/>
       ) : (
         <ModalLogin />
       )}
