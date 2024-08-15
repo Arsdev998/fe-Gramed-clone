@@ -8,12 +8,24 @@ import Book from "./pages/Book.jsx";
 import ProductDetailPage from "./pages/ProductDetailPage.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
+import MyAccount from "./pages/MyAccount.jsx";
+import Wishlist from "./pages/Wishlist.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      {
+        path: "/my-account",
+        element: <MyAccount />,
+        children: [
+          {
+            path: "/my-account/wishlist",
+            element: <Wishlist />,
+          },
+        ],
+      },
       {
         path: "/",
         element: <Home />,
@@ -23,18 +35,17 @@ const router = createBrowserRouter([
         element: <Book />,
       },
       {
-        path:'/product/:id',
-        element:<ProductDetailPage/>
-      }
+        path: "/product/:id",
+        element: <ProductDetailPage />,
+      },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-  <Provider store={store}>
-
-    <RouterProvider router={router} />
-  </Provider>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>
 );

@@ -16,7 +16,7 @@ export default function App() {
       <HelpHeader />
       <Header />
       <Outlet />
-      <Toaster richColors position="bottom-center"/>
+      <Toaster richColors position="top-center"/>
     </>
   );
 }

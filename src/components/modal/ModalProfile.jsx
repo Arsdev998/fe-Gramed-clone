@@ -60,7 +60,7 @@ export function ModalProfile() {
                 <Link>Akun Saya</Link>
               </li>
               <li>
-                <Link>Wishlist Saya</Link>
+                <Link to={'/my-account/wishlist'}>Wishlist Saya</Link>
               </li>
             </ul>
           </div>

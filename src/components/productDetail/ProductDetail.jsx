@@ -5,10 +5,11 @@ import { BreadcrumbHeader } from "../ui/breadCrumsHeader";
 import DetailBook from "./DetailBook";
 import { getById } from "@/utils/api";
 import { ModalShare } from "../modal/ModalShare";
+import AddWishlist from "./AddWishlist";
 
 const ProductDetail = ({ id }) => {
-  const [data, setData] = useState(null); 
-  const [selectedTab, setSelectedTab] = useState("format"); 
+  const [data, setData] = useState(null);
+  const [selectedTab, setSelectedTab] = useState("format");
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
@@ -21,10 +22,10 @@ const ProductDetail = ({ id }) => {
 
   const togleDescription = () => {
     setExpanded(!expanded);
-  }
+  };
 
   const renderDescription = () => {
-    if(!data?.description) return null;
+    if (!data?.description) return null;
     const trunctedDescripton = data.description.substring(0, 250);
 
     return (
@@ -33,14 +34,17 @@ const ProductDetail = ({ id }) => {
         <p className="text-gray-500 text-sm">
           {expanded ? data.description : trunctedDescripton}
         </p>
-          {data.description.length > 250 && (
-            <span onClick={togleDescription} className="text-gramed cursor-pointer absolute right-0">
+        {data.description.length > 250 && (
+          <span
+            onClick={togleDescription}
+            className="text-gramed cursor-pointer absolute right-0"
+          >
             {expanded ? "Ringkas Deskripsi" : "Baca Selengkapnya"}
-            </span>
-          )}
+          </span>
+        )}
       </div>
-    )
-  }
+    );
+  };
 
   if (!data) {
     return <Loading />; // Show loading state while data is being fetched
@@ -64,7 +68,10 @@ const ProductDetail = ({ id }) => {
               <h1 className="text-gray-500 uppercase text-lg">{data.author}</h1>
               <h2 className="text-2xl font-semibold">{data.title}</h2>
             </div>
-           <ModalShare/>
+            <div className="">
+              <AddWishlist bookId={data.id}/>
+              <ModalShare />
+            </div>
           </div>
           {/* detail book */}
           <div className="">

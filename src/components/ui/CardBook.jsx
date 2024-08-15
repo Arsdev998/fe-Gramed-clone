@@ -2,7 +2,7 @@ import React from "react";
 import PriceDisplay from "./priceidplay";
 import { Link } from "react-router-dom";
 
-const CardBook = ({ img, title, price, author ,id}) => {
+const CardBook = ({ img, title, price, author, id }) => {
   return (
     <div className="max-w-[200px]">
       <Link to={`/product/${id}`}>
@@ -15,7 +15,9 @@ const CardBook = ({ img, title, price, author ,id}) => {
           </h2>
           <p className="text-sm">{title}</p>
           <p className="text-sm text-gramed font-bold">
-            {price.toLocaleString("id-ID")}
+            {price !== undefined
+              ? `Rp ${price.toLocaleString("id-ID")}`
+              : "Harga tidak tersedia"}
           </p>
         </div>
       </Link>
