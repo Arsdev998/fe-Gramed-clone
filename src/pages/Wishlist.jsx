@@ -1,40 +1,30 @@
 import WishlistNotfound from "@/components/accountPage/WishlistNotfound";
 import CardBook from "@/components/ui/CardBook";
 import Loading from "@/components/ui/Loading";
+import { getWishlist } from "@/features/wishlistSlice";
 import { getById } from "@/utils/api";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Wishlist = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const {  wishlist , isLoading} = useSelector((state) => state.wishlist);
   const { user } = useSelector((state) => state.auth);
   const userId = user?.id;
-  console.log(user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchWishllist = async () => {
-      try {
-        const response = await getById("/api/book/wishlist/get/" + userId);
-        setData(response);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchWishllist();
-  }, []);
+    dispatch(getWishlist(userId));
+  }, [userId, dispatch]);
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />;
   }
 
   return (
     <div>
-      {data?.length > 0 ? (
-        <div className="flex gap-3 flex-wrap w-[500px]">
-          {data.map((book) => (
+      {wishlist?.length > 0 ? (
+        <div className="flex gap-3 flex-wrap w-[700px]">
+          {wishlist.map((book) => (
             <CardBook
               key={book?.id}
               img={book?.book.coverUrl}
@@ -47,7 +37,7 @@ const Wishlist = () => {
         </div>
       ) : (
         <p className="text-center text-gray-500 font-semibold">
-         <WishlistNotfound/>
+          <WishlistNotfound />
         </p>
       )}
     </div>

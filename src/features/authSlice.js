@@ -111,6 +111,9 @@ const authSlice = createSlice({
         state.status = "failed";
         console.log("Logout failed");
       })
+      .addCase(getMe.pending, (state) => {
+        state.status = "loading";
+      })
       .addCase(getMe.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isAuthenticated = true;

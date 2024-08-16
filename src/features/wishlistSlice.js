@@ -23,10 +23,10 @@ export const postWishlist = createAsyncThunk(
   }
 );
 
-export const getWishlist = createAsyncThunk("/getwishlist", async ( thunkApi) => {
+export const getWishlist = createAsyncThunk("/getwishlist", async ( userId,thunkApi) => {
   try {
-    const response = await get("/api/book/wishlist/get");
-    return response.data;
+    const response = await get("/api/book/wishlist/get/" + userId);
+    return response
   } catch (error) {
     const message = error.response?.data?.message || error.message;
     return thunkApi.rejectWithValue(message);
@@ -73,9 +73,10 @@ const wishlistSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getWishlist.fulfilled, (state, action) => {
-        state.wishlist = action.payload;
+        state.wishlist = action.payload
         state.isLoading = false;
-        state.message = action.payload.message;
+        state.message = action.payload
+        console.log("wishlist kkkkkk",state.wishlist);
       })
       .addCase(getWishlist.rejected, (state, action) => {
         state.isLoading = false;

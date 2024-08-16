@@ -29,8 +29,10 @@ const AddWishlist = ({ bookId }) => {
     if (isInWishlist) {
       const wishlistItem = wishlist.find((item) => item.bookId === bookId);
       dispatch(deleteWishlist(wishlistItem.id));
+      setIsInWishlist(false);
     } else {
       dispatch(postWishlist({ userId: user.id, bookId }));
+      setIsInWishlist(true);
     }
   };
 
