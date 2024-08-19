@@ -8,9 +8,13 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "../ui/navigation-menu";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Button } from "../ui/button";
 
 const Nav = () => {
   const [data, setData] = useState([]);
+  const [searchParams,setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchCategory = async () => {
       const response = await get("/api/category/get");
@@ -19,7 +23,12 @@ const Nav = () => {
     fetchCategory();
   }, []);
 
-  console.log(data);
+  const handleFilter = (categoryName) =>{
+     searchParams.set('category',categoryName)
+     setSearchParams(searchParams);
+     navigate(`/books?${searchParams.toString()}`)
+  }
+
   return (
     <nav>
       <NavigationMenu>
@@ -33,9 +42,9 @@ const Nav = () => {
                 <ul className="" key={item.id}>
                   <li c>
                     <NavigationMenuLink asChild>
-                      <a className="" href="/">
+                      <Button variant="ghost" onClick={() => handleFilter(item.name)}>
                         {item.name}
-                      </a>
+                      </Button>
                     </NavigationMenuLink>
                   </li>
                 </ul>

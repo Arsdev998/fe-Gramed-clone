@@ -5,7 +5,7 @@ const HeadList = ({ title, href }) => {
   return (
     <div className="flex justify-between w-full my-5">
       <h2 className="text-2xl font-bold">{title}</h2>
-      <Link to={href} className="text-gramed ">
+      <Link to={href} className="text-gramed font-semibold">
         Lihat Semua
       </Link>
     </div>

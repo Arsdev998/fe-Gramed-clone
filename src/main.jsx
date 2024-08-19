@@ -4,12 +4,12 @@ import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home.jsx";
-import Book from "./pages/Book.jsx";
 import ProductDetailPage from "./pages/ProductDetailPage.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
 import MyAccount from "./pages/MyAccount.jsx";
 import Wishlist from "./pages/Wishlist.jsx";
+import BooksPage from "./pages/BooksPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,8 +31,8 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/book",
-        element: <Book />,
+        path: "/books",
+        element: <BooksPage />,
       },
       {
         path: "/product/:id",
